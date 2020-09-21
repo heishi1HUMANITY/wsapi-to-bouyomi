@@ -1,0 +1,23 @@
+<script>
+    const recognition = new webkitSpeechRecognition();
+    recognition.lang = 'ja-JP';
+    recognition.continuous = true;
+    recognition.maxAlternatives = 1;
+
+    let index = 0;
+    recognition.onresult = e => {
+        let body = JSON.stringify({text: e.results[index][0].transcript});
+        fetch('./app', {method: 'post', headers: {'Content-Type': 'application/json'}, body})
+        .then(res => res.json())
+        .then(data => console.log(data))
+        .catch(e => console.log(e));
+        index++;
+    };
+    recognition.onend = e => {
+        console.log('restart');
+        index = 0;
+        recognition.start();
+    };
+    recognition.start();
+
+</script>

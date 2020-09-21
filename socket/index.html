@@ -1,0 +1,21 @@
+<script src="./socket.io/socket.io.js"></script>
+<script>
+    const socket = io.connect(location.origin);
+    const recognition = new webkitSpeechRecognition();
+    recognition.lang = 'ja-JP';
+    recognition.continuous = true;
+    recognition.maxAlternatives = 1;
+
+    let index = 0;
+    recognition.onresult = e => {
+        let text = e.results[index][0].transcript;
+        socket.emit('text', text);
+        index++;
+    };
+    recognition.onend = e => {
+        index = 0;
+        recognition.start();
+        console.log('restart');
+    };
+    recognition.start();
+</script>
