@@ -25,3 +25,6 @@ Google ChromeのwebkitSpeechRecognitionを利用して発話を認識し、結�
 5. Google Chromeで[「localhost:8000」](http://localhost:8000)にアクセスし、マイクの権限を許可する
 6. 話す
 7. 終了する際には、プロンプトで「ctrl+c」を押し、プログラムを停止させる。
+
+### ver.PWA
+https://chrome2bouyomichan.tk/
